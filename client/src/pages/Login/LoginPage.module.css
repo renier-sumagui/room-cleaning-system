@@ -1,0 +1,17 @@
+.loginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+}
+
+.main {
+    width: 21rem;
+}
+
+.title {
+    font-weight: var(--fw-bold);
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+.button {
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    background: hsl(var(--clr-primary));
+    color: hsl(var(--clr-white));
+    transition: background var(--transition-time) ease;
+}
+
+.button:hover {
+    background: var(--clr-primary-hover);
+}

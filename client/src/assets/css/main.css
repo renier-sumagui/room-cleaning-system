@@ -1,0 +1,69 @@
+:root {
+    --clr-primary: 160, 39%, 54%;
+    --clr-primary-hover: hsl(var(--clr-primary), 0.9);
+
+    --clr-white: 0, 0%, 100%;
+    --clr-black: 0, 0%, 7%;
+    --clr-teal: 185, 48%, 39%;
+    --clr-light-gray: 213, 58%, 96%;
+    --clr-gray: 0, 0%, 50%;
+    --clr-red: 351, 70%, 47%;
+
+    --fw-medium: 600;
+    --fw-bold: 900;
+
+    --h2-fs: 1.5rem;
+
+    --br-semi: 1rem;
+
+    --transition-time: 150ms;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+* {
+    font: inherit;
+}
+
+html {
+    font-size: 18px;
+}
+
+body {
+    font-family: "Figtree", "Roboto", sans-serif;
+    color: hsl(var(--clr-black));
+}
+
+*, h1, h2 {
+    margin: 0;
+}
+
+button, input[type="submit"] {
+    cursor: pointer;
+}
+
+input, button {
+    border: none;
+    outline: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.active {
+    background: hsl(var(--clr-primary));
+    color: hsl(var(--clr-white));
+}
+
+th {
+    font-weight: var(--fw-bold);
+}

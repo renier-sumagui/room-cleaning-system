@@ -1,0 +1,43 @@
+.loginForm, .inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm, .submit {
+    border-radius: var(--br-semi);
+}
+
+.loginForm {
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: hsl(var(--clr-white));
+    margin-top: 0.5rem;
+    box-shadow: 0 0.5rem 0.8rem 0 hsl(var(--clr-black), 0.5);
+    max-width: 80%;
+    margin-inline: auto;
+}
+
+.title {
+    font-size: var(--h2-fs);
+    font-weight: var(--fw-medium);
+}
+
+.inputs {
+    gap: 0.5rem;
+}
+
+.inputs input {
+    outline: none;
+    border-bottom: 0.0625rem solid hsl(var(--clr-black));
+}
+
+.submit {
+    background: hsl(var(--clr-primary));
+    color: hsl(var(--clr-white));
+    padding: 0.3rem 2rem;
+}
+
+.submit:hover {
+    background: var(--clr-primary-hover);
+}

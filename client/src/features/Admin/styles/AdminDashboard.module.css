@@ -1,0 +1,99 @@
+.adminDashboard {
+    display: grid;
+    grid-template-columns: 15rem auto;
+    height: 100vh;
+}
+
+.systemTitle {
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+}
+
+.navigation {
+    padding: 0.5rem 0.8rem;
+}
+
+.navList {
+    display: flex;
+}
+.navList {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0.8rem;
+}
+
+.navList > li {
+    border-radius: var(--br-semi);
+    overflow: hidden;
+}
+
+.navList > li > a {
+    padding: 0.5rem;
+    display: inline-block;
+    width: 100%;
+    transition: all var(--transition-time) ease;
+}
+
+.navList > li > a:hover {
+    background: hsl(var(--clr-primary));
+    color: hsl(var(--clr-white));
+}
+
+.main {
+    background: hsl(var(--clr-light-gray));
+    padding: 1rem;
+
+}
+
+
+.table {
+    text-align: left;
+    min-width: 50rem;
+    margin-top: 0.5rem;
+    background: hsl(var(--clr-white));
+}
+
+.table th, .table td {
+    padding: 0.2rem;
+}
+
+/* --------------------- ADMIN EMPLOYEES DASHBOARD --------------------- */
+.adminEmployeesDashboard, .adminRoomsDashboard {
+    width: -moz-fit-content;
+    width: fit-content;
+    /* margin-inline: auto; */
+}
+
+/* --------------------- CREATE EMPLOYEE FORM --------------------- */
+.createEmployeeForm, .createRoomsForm {
+    max-width: 25rem;
+    background: hsl(var(--clr-white));
+    padding: 1rem;
+    margin-top: 0.5rem;
+}
+ .createEmployeeForm > label, .createRoomsForm > label, 
+ .assignedEmployees {
+    display: grid;
+    grid-template-columns: 8rem auto;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+
+.createEmployeeForm > label > input,
+.createRoomsForm label input {
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px solid hsl(var(--clr-black));
+    background: none;
+}
+
+.submit {
+    background: hsl(var(--clr-primary));
+    color: hsl(var(--clr-white));
+    padding: 0.3rem 2rem;
+    border-radius: var(--br-semi);
+}
+
+.submit:hover {
+    background: var(--clr-primary-hover);
+}
