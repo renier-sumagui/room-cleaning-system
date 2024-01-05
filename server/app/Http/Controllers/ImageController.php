@@ -71,8 +71,12 @@ class ImageController extends Controller
         ]);
     
         $image = Image::findOrFail($data["id"]);
-    
+
+        
         if ($data["status"] === "accept") {
+            $image->status = "accepted";
+            $image->save();
+
             $from = "studyfilteam@gmail.com";
             $to = $data["email"];
             $topic = "Accepted";
