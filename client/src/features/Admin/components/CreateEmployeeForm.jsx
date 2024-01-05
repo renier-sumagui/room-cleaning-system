@@ -3,9 +3,14 @@ import styles from "../styles/AdminDashboard.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { createEmployee } from "../api/AdminDashboardApi";
+import LoadingSpinner from "components/Spinner/LoadingSpinner";
+import ErrorGroup from "components/Error/ErrorGroup.jsx";
+import InputError from "components/Error/InputError";
 
 export default function CreateEmployeeForm() {
     const navigate = useNavigate();
+    let [loading, setLoading] = useState(false);
+    let [emailError, setEmailError] = useState(false);
 
     const [employeeId, setEmployeeId] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -21,6 +26,16 @@ export default function CreateEmployeeForm() {
         if (!regex.test(contactNumber)) {
             return;
         } else {
+            console.log({
+                employee_id: employeeId,
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: birthday,
+                birthday: birthday,
+                contact_number: contactNumber
+            })
+            setLoading(true);
             let response = await createEmployee({
                 employee_id: employeeId,
                 first_name: firstName,
@@ -30,16 +45,20 @@ export default function CreateEmployeeForm() {
                 birthday: birthday,
                 contact_number: contactNumber
             });
+            setLoading(false);
 
             if (response.success) {
                 navigate(-1);
+            } else {
+                setEmailError(true);
             }
         };
     }
 
     return (
         <>
-            <Button type="button" onClick={() => navigate(-1)}>Go Back</Button>
+            {loading && <LoadingSpinner />}
+            <Button type="button" onClick={() => navigate(-1)} disabled={loading}>Go Back</Button>
             <form className={styles.createEmployeeForm} onSubmit={e => handleSubmit(e)}>
                 <label>
                     <span>Employee ID:</span> 
@@ -55,7 +74,10 @@ export default function CreateEmployeeForm() {
                 </label>
                 <label>
                     <span>Email:</span>
-                    <input type="email" value={ email } onChange={e => setEmail(e.target.value)} required />
+                    <div>
+                        <input type="email" value={ email } onChange={e => setEmail(e.target.value)} required />
+                        {emailError && <InputError error="Email is already taken" />}
+                    </div>
                 </label>
                 <label>
                     <span>Birthday: </span>
@@ -66,7 +88,7 @@ export default function CreateEmployeeForm() {
                     <input type="text" value={ contactNumber } onChange={e => setContactNumber(e.target.value)} required/>
                 </label>
 
-                <input className={ styles.submit } type="submit" value="Create" />
+                <input className={ styles.submit } type="submit" value="Create" disabled={loading} />
             </form>
         </>
     )

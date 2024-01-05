@@ -11,11 +11,6 @@ export default function AssignedRoomsTable({ rooms }) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Science Room</td>
-                    <td>50</td>
-                </tr>
                 {rooms.map(room => {
                     return (
                         <tr key={room.id}>

@@ -29,5 +29,3 @@ Route::post("/employees/login", [EmployeeController::class, "login"]);
 
 Route::get("/rooms", [RoomController::class, "index"]);
 Route::post("/rooms/create", [RoomController::class, "createRoomWithEmployees"]);
-
-

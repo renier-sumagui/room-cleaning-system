@@ -14,6 +14,7 @@ export default function AdminNavigation() {
             <ul className={styles.navList}>
                 <li><NavLink to="/admin/employees" className={isActive}>Employees</NavLink></li>
                 <li><NavLink to="/admin/rooms" className={isActive}>Rooms</NavLink></li>
+                <li><NavLink to="/login" className={styles.danger}>Logout</NavLink></li>
             </ul>
         </nav>
     )

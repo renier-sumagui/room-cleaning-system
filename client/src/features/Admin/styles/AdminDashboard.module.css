@@ -34,15 +34,22 @@
     transition: all var(--transition-time) ease;
 }
 
-.navList > li > a:hover {
+.navList > li > a:not(.danger):hover {
     background: hsl(var(--clr-primary));
     color: hsl(var(--clr-white));
+}
+
+.danger {
+    color: hsl(var(--clr-red));
+}
+.danger:hover {
+    font-weight: var(--fw-bold);
 }
 
 .main {
     background: hsl(var(--clr-light-gray));
     padding: 1rem;
-
+    position: relative;
 }
 
 
@@ -51,10 +58,12 @@
     min-width: 50rem;
     margin-top: 0.5rem;
     background: hsl(var(--clr-white));
+    border-collapse: collapse;
 }
 
 .table th, .table td {
-    padding: 0.2rem;
+    padding: 0.5rem;
+    border: 1px solid hsl(var(--clr-light-gray))
 }
 
 /* --------------------- ADMIN EMPLOYEES DASHBOARD --------------------- */
@@ -70,6 +79,7 @@
     background: hsl(var(--clr-white));
     padding: 1rem;
     margin-top: 0.5rem;
+    border-radius: 0.8rem;
 }
  .createEmployeeForm > label, .createRoomsForm > label, 
  .assignedEmployees {
@@ -80,11 +90,11 @@
 }
 
 
-.createEmployeeForm > label > input,
-.createRoomsForm label input {
+label input{
     padding: 0.3rem 0.5rem;
     border-bottom: 1px solid hsl(var(--clr-black));
     background: none;
+    width: 100%;
 }
 
 .submit {
@@ -92,6 +102,7 @@
     color: hsl(var(--clr-white));
     padding: 0.3rem 2rem;
     border-radius: var(--br-semi);
+    margin-top: 1rem;
 }
 
 .submit:hover {

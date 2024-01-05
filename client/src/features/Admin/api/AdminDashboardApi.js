@@ -19,8 +19,13 @@ export async function getRooms() {
 }
 
 export async function createEmployee(employee) {
-    let response = await Axios.post(`${apiUrl}/employees/create`, employee);
-    return response.data;
+    try {
+        let response = await Axios.post(`${apiUrl}/employees/create`, employee);
+        return response.data;
+    } catch (err) {
+        console.log(err.response.data);
+        return { success: false, errors: err.response.data.message };
+    }
 }
 
 export async function createRoom(room) {

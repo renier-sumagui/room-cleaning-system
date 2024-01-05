@@ -3,3 +3,9 @@
     font-size: 0.8rem;
     font-weight: var(--fw-medium);
 }
+
+.errorGroups {
+    background: hsl(var(--clr-red));
+    color: hsl(var(--clr-white));
+    font-weight: var(--fw-medium);
+}

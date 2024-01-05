@@ -40,7 +40,7 @@ body {
     margin: 0;
 }
 
-button, input[type="submit"] {
+button, input[type="submit"], select, option {
     cursor: pointer;
 }
 
