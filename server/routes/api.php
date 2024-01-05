@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,7 @@ Route::post("/employees/login", [EmployeeController::class, "login"]);
 
 Route::get("/rooms", [RoomController::class, "index"]);
 Route::post("/rooms/create", [RoomController::class, "createRoomWithEmployees"]);
+
+Route::post("/images/upload", [ImageController::class, "uploadImages"]);
+Route::get("/images/room/{room_id}", [ImageController::class, "getPendingImages"]);
+Route::post("/images/process", [ImageController::class, "processImage"]);
