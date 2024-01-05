@@ -86,7 +86,7 @@ class ImageController extends Controller
             $email->addContent(
                 "text/html", "{$message}"
             );
-            $sendgrid = new \SendGrid('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');
+            $sendgrid = new \SendGrid(getenv("SENDGRID_API_KEY"));
             try {
                 $response = $sendgrid->send($email);
                 return response()->json(["success" => true]);
@@ -109,7 +109,7 @@ class ImageController extends Controller
             $email->addContent(
                 "text/html", "{$message}"
             );
-            $sendgrid = new \SendGrid('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');
+            $sendgrid = new \SendGrid(getenv("SENDGRID_API_KEY"));
             try {
                 $response = $sendgrid->send($email);
                 return response()->json(["success" => true]);
