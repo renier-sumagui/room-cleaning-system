@@ -23,7 +23,7 @@ export default function AdminEmployeesDashboard() {
     return (
         <div className={styles.adminEmployeesDashboard}>
             <Button onClick={() => navigate("create")} type="button">Create Employee</Button>
-            {employees.length > 0 ? 
+            {employees ? 
                 <EmployeesTable employees={ employees } />
                 : loading ? <LoadingSpinner /> : <p>No employees yet, please create one.</p>}
         </div>
