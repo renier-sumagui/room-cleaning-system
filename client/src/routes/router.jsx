@@ -1,6 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import NotFound from "pages/NotFOund.jsx";
+import NotFound from "pages/NotFound.jsx";
 import LoginPage from "pages/Login/LoginPage.jsx";
 import AdminDashboardPage from "features/Admin/pages/AdminDashboardPage";
 import AdminEmployeesDashboard from "features/Admin/components/AdminEmployeesDashboard";
