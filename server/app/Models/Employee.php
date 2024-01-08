@@ -33,4 +33,8 @@ class Employee extends Authenticatable
     public function rooms() {
         return $this->belongsToMany(Room::class, "employee_room", "employee_id", "room_id");
     }
+
+    public function students() {
+        return $this->belongsToMany(Student::class);
+    }
 }

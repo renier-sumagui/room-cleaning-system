@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Image;
 use Exception;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
-
-use App\Mail\AcceptanceEmail;
-use App\Mail\RejectionEmail;
 
 use SendGrid;
 
@@ -35,6 +31,26 @@ class ImageController extends Controller
         }
 
         return response()->json(["success" => true]);
+    }
+
+    public function getAcceptedImages($room_id) {
+        $acceptedImages = Image::where("room_id", $room_id)
+            ->where("status", "accepted")
+            ->with("employee")
+            ->get();
+
+        $response = $acceptedImages->map(function ($image) {
+            return [
+                "id" => $image->id,
+                "image_url" => $this->getImageUrl($image->local_path), 
+                "uploaded_by" => [
+                    "first_name" => $image->employee->first_name,
+                    "last_name" => $image->employee->last_name
+                ]
+            ];
+        });
+
+        return response()->json($response);
     }
 
     public function getPendingImages($room_id) {
@@ -71,75 +87,68 @@ class ImageController extends Controller
         ]);
     
         $image = Image::findOrFail($data["id"]);
-
         
         if ($data["status"] === "accept") {
             $image->status = "accepted";
             $image->save();
-
-            $from = "studyfilteam@gmail.com";
-            $to = $data["email"];
-            $topic = "Accepted";
-            $message = "Your image was accepted";
     
-            $email = new \SendGrid\Mail\Mail(); 
-            $email->setFrom("studyfilteam@gmail.com", "Cleaning Room System");
-            $email->setSubject("Image Accepted");
-            $email->addTo($to, $to);
-            $email->addContent("text/plain", "{$message}");
-            $email->addContent(
-                "text/html", "{$message}"
-            );
-            $sendgrid = new \SendGrid(getenv("SENDGRID_API_KEY"));
             try {
-                $response = $sendgrid->send($email);
+                $this->sendAcceptImageEmail($data["email"]);
                 return response()->json(["success" => true]);
             } catch (Exception $e) {
                 return response(['Caught exception: '. $e->getMessage() ."\n"]);
             }
         } else {
-            $this->deleteImage($image);
-
-            $from = "studyfilteam@gmail.com";
-            $to = $data["email"];
-            $topic = "Rejected";
-            $message = "Your image was rejected";
-    
-            $email = new \SendGrid\Mail\Mail(); 
-            $email->setFrom("studyfilteam@gmail.com", "Cleaning Room System");
-            $email->setSubject("Image Rejected");
-            $email->addTo($to, $to);
-            $email->addContent("text/plain", "{$message}");
-            $email->addContent(
-                "text/html", "{$message}"
-            );
-            $sendgrid = new \SendGrid(getenv("SENDGRID_API_KEY"));
             try {
-                $response = $sendgrid->send($email);
+                $this->rejectImageEmail($data["email"]);
+                $this->deleteImage($image);
                 return response()->json(["success" => true]);
             } catch (Exception $e) {
                 return response(['Caught exception: '. $e->getMessage() ."\n"]);
             }
         }
-    
-        // return response()->json(["success" => true]);
     }
 
-    protected function acceptImage(Image $image, $employeeEmail) {
-        $image->update(["status" => "accepted"]);
-        
+    protected function sendAcceptImageEmail($employeeEmail) {
+        $message = "Your image was accepted";
 
+        $email = new \SendGrid\Mail\Mail(); 
+        $email->setFrom("studyfilteam@gmail.com", "Cleaning Room System");
+        $email->setSubject("Image Accepted");
+        $email->addTo($employeeEmail, $employeeEmail);
+        $email->addContent("text/plain", "{$message}");
+        $email->addContent("text/html", "{$message}");
 
+        $sendgrid = new \SendGrid(getenv("SENDGRID_API_KEY"));
+
+        $sendgrid->send($email);
+        return ["success" => true];
     }
 
-    protected function rejectImage(Image $image, $employeeEmail) {
-        $this->deleteImage($image);
-        
-        Mail::to($employeeEmail)->send(new RejectionEmail($employeeEmail));
+    protected function rejectImageEmail($employeeEmail) {
+        $message = "Your image was rejected";
+
+        $email = new \SendGrid\Mail\Mail(); 
+        $email->setFrom("studyfilteam@gmail.com", "Cleaning Room System");
+        $email->setSubject("Image Rejected");
+        $email->addTo($employeeEmail, $employeeEmail);
+        $email->addContent("text/plain", "{$message}");
+        $email->addContent("text/html", "{$message}");
+
+        $sendgrid = new \SendGrid(getenv("SENDGRID_API_KEY"));
+
+        $sendgrid->send($email);
+        return ["success" => true];
     }
 
     protected function deleteImage(Image $image) {
-        Storage::disk("public")->delete($image->local_path);
-        $image->delete();
+        if (Storage::disk('public')->exists($image->local_path)) {
+            try {
+                Storage::disk('public')->delete($image->local_path);
+            } catch (\Exception $e) {
+                return $e;
+            }
+            $image->delete();
+        }
     }
 }

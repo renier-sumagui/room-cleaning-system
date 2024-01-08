@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Exports\StudentsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class EmployeeController extends Controller
 {
@@ -68,5 +71,20 @@ class EmployeeController extends Controller
         $rooms = $employee->rooms;
     
         return response()->json(["rooms" => $rooms], 200);
+    }
+
+    public function getAssignedStudents($employeeId) {
+        $employee = Employee::find($employeeId);
+        $students = $employee->students;
+        
+        return response()->json($students);
+    }
+
+    public function exportAssignedStudentsExcel($employeeId) {
+        $employee = Employee::find($employeeId);
+
+        $students = $employee->students;
+
+        return Excel::download(new StudentsExport($students), "students.xlsx");
     }
 }
