@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => ['*'],
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ['http://localhost:5173', 'https://room-cleaning-system-main.vercel.app', 'https://room-cleaning-system-main-26gf.vercel.app'],
 
     'allowed_headers' => ['*'],
 
