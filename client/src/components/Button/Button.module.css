@@ -1,11 +1,21 @@
 .button {
-    border-radius: 0.5rem;
-    padding: 0.2rem 0.5rem;
-    background: hsl(var(--clr-primary));
+    border-radius: var(--br-small);
+    padding: var(--btn-padding);
     color: hsl(var(--clr-white));
-    transition: background var(--transition-time) ease;
 }
 
-.button:hover {
-    background: var(--clr-primary-hover);
+.green {
+    background: hsl(var(--clr-primary));
+}
+
+.danger {
+    background: hsl(var(--clr-red));
+}
+
+.green:hover {
+    outline: var(--oln-primary-neutral);
+}
+
+.danger:hover {
+    outline: var(--oln-red-neutral);
 }

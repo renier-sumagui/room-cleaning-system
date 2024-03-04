@@ -1,5 +1,6 @@
 import { apiUrl } from "src/config";
 import Axios from "axios";
+import { headers } from "src/config";
 
 export function submitRoomCreation(roomInformation) {
     return true
@@ -7,9 +8,7 @@ export function submitRoomCreation(roomInformation) {
 
 export async function getEmployees() {
     let response = await Axios.get(`${apiUrl}/employees/non-admins`, {
-        headers: {
-            "ngrok-skip-browser-warning": "69420",
-        }
+        headers: headers
     });
 
 
@@ -20,9 +19,7 @@ export async function getEmployees() {
 
 export async function getRooms() {
     let response = await Axios.get(`${apiUrl}/rooms`, {
-        headers: {
-            "ngrok-skip-browser-warning": "69420",
-        }
+        headers: headers
     });
     return response.data;
 }
@@ -30,9 +27,7 @@ export async function getRooms() {
 export async function createEmployee(employee) {
     try {
         let response = await Axios.post(`${apiUrl}/employees/create`, employee, {
-            headers: {
-                "ngrok-skip-browser-warning": "69420",
-            }
+            headers: headers
         });
         return response.data;
     } catch (err) {
@@ -42,9 +37,20 @@ export async function createEmployee(employee) {
 
 export async function createRoom(room) {
     const response = await Axios.post(`${apiUrl}/rooms/create`, room, {
-        headers: {
-            "ngrok-skip-browser-warning": "69420",
-        }
+        headers: headers
     });
+    return response.data;
+}
+
+export async function createStudent(student) {
+    const response = await Axios.post(`${apiUrl}/students/create`, student, {
+        headers: headers
+    })
+
+    return response.data;
+}
+
+export async function getImagesOfRoom(id) {
+    const response = await Axios.get(`${apiUrl}/images/room/${id}`);
     return response.data;
 }

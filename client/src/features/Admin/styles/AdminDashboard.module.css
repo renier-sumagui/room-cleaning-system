@@ -1,3 +1,8 @@
+.navList, .roomImages, .imageButtons,
+.exitBtnContainer {
+    display: flex;
+}
+
 .adminDashboard {
     display: grid;
     grid-template-columns: 15rem auto;
@@ -14,9 +19,6 @@
 }
 
 .navList {
-    display: flex;
-}
-.navList {
     flex-direction: column;
     gap: 10px;
     margin-top: 0.8rem;
@@ -31,7 +33,7 @@
     padding: 0.5rem;
     display: inline-block;
     width: 100%;
-    transition: all var(--transition-time) ease;
+    transition: all var(--tsn-time) ease;
 }
 
 .navList > li > a:not(.danger):hover {
@@ -67,14 +69,14 @@
 }
 
 /* --------------------- ADMIN EMPLOYEES DASHBOARD --------------------- */
-.adminEmployeesDashboard, .adminRoomsDashboard {
+.adminEmployeesDashboard, .adminRoomsDashboard, .adminStudentsDashboard {
     width: -moz-fit-content;
     width: fit-content;
     /* margin-inline: auto; */
 }
 
 /* --------------------- CREATE EMPLOYEE FORM --------------------- */
-.createEmployeeForm, .createRoomsForm {
+.createEmployeeForm, .createRoomsForm, .createStudentForm {
     max-width: 25rem;
     background: hsl(var(--clr-white));
     padding: 1rem;
@@ -82,7 +84,7 @@
     border-radius: 0.8rem;
 }
  .createEmployeeForm > label, .createRoomsForm > label, 
- .assignedEmployees {
+ .assignedEmployees, .createStudentForm > label {
     display: grid;
     grid-template-columns: 8rem auto;
     align-items: center;
@@ -107,4 +109,67 @@ label input{
 
 .submit:hover {
     background: var(--clr-primary-hover);
+}
+
+/* --------------------- ROOM --------------------- */
+.room {
+    min-width: 30rem;
+    min-height: 80%;
+
+}
+
+.roomImages {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+
+.imageCard {
+    display: grid;
+    grid-template-rows: 3fr auto auto; 
+    gap: 0.5rem;
+    height: 14rem;
+    width: 15rem;
+    background-color: hsl(var(--clr-white));
+    padding: 0.5rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    text-align: center;
+    align-items: space-between;
+    box-shadow: 0 0 0.5rem 0 hsl(var(--clr-black), 0.5);
+    transition: transform var(--tsn-time) ease;
+}
+
+.imageCard:hover {
+    transform: translateY(-0.2rem);
+}
+
+.imageCard p {
+    font-size: var(--fs-small);
+}
+
+.imageCard span {
+    font-weight: var(--fw-medium);
+}
+
+.imageContainer {
+    background-size: cover;
+    background-position: center;
+    border-radius: 0.5rem 0.5rem 0 0;
+    cursor: pointer;
+    border: 0.06rem solid hsl(var(--clr-primary));
+}
+
+.exitBtnContainer {
+    justify-content: flex-end;
+}
+
+.imageButtons {
+    justify-content: space-around;
+}
+
+.imageModal {
+    max-height: 30rem;
+    max-width: 50rem;
+    background-size: contain;
 }

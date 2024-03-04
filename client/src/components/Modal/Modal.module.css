@@ -1,0 +1,23 @@
+.dialogContent, .exitBtnContainer {
+    display: flex;
+}
+
+dialog {
+    max-width: 80%;
+    max-height: 90%;
+    margin: auto;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: var(--bs-light-dark);
+    background: hsl(var(--clr-light-gray));
+}
+
+.dialogContent {
+    overflow: auto;
+    flex-direction: column;
+}
+
+.exitBtnContainer {
+    margin-bottom: 0.5rem;
+}

@@ -1,7 +1,13 @@
 :root {
-    --clr-primary: 160, 39%, 54%;
-    --clr-primary-hover: hsl(var(--clr-primary), 0.9);
+    --br-small: 0.5rem;
+    --br-semi: 1rem;
+    --border-small-primary: 0.1rem solid hsl(var(--clr-primary));
+    --btn-padding: 0.2rem 1rem;
 
+    --bs-light-dark: 0 0 1rem 0 hsl(var(--clr-black), 0.5);
+
+    --clr-primary: 160, 39%, 54%;
+    
     --clr-white: 0, 0%, 100%;
     --clr-black: 0, 0%, 7%;
     --clr-teal: 185, 48%, 39%;
@@ -9,14 +15,22 @@
     --clr-gray: 0, 0%, 50%;
     --clr-red: 351, 70%, 47%;
 
+    --clr-primary-hover: hsl(var(--clr-primary), 0.9);
+    --clr-red-hover: hsl(var(--clr-red), 0.9);
+
+    --fs-small: 0.8rem;
+
     --fw-medium: 600;
     --fw-bold: 900;
 
+    --gap-small: 0.5rem;
+
     --h2-fs: 1.5rem;
 
-    --br-semi: 1rem;
+    --oln-primary-neutral: 0.2rem solid hsl(var(--clr-primary), 0.3);
+    --oln-red-neutral: 0.2rem solid hsl(var(--clr-red), 0.3);
 
-    --transition-time: 150ms;
+    --tsn-time: 150ms;
 }
 
 *, ::before, ::after {
@@ -24,6 +38,7 @@
 }
 
 * {
+    /* outline: 1px solid red; */
     font: inherit;
 }
 
@@ -34,13 +49,30 @@ html {
 body {
     font-family: "Figtree", "Roboto", sans-serif;
     color: hsl(var(--clr-black));
+    position: relative;
 }
 
 *, h1, h2 {
     margin: 0;
 }
 
-button, input[type="submit"], select, option {
+div::-webkit-scrollbar {
+    width: 0.5rem;
+    border-left: var(--border-small-primary);
+}
+
+div::-webkit-scrollbar-thumb {
+    background: hsl(var(--clr-primary));
+    border-radius: 1rem;
+}
+
+div {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--clr-primary));
+}
+
+button, input[type="submit"], select, option, input:last-of-type::file-selector-button,
+.trLink {
     cursor: pointer;
 }
 
@@ -67,3 +99,13 @@ a {
 th {
     font-weight: var(--fw-bold);
 }
+.trLink:hover {
+    background: hsl(var(--clr-light-gray));
+}
+
+input[type="file"] {
+    padding: 0.2rem;
+}
+
+
+

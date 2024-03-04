@@ -8,6 +8,14 @@
     flex-direction: column;
 }
 
+.home {
+    display: flex;
+    background: white;
+    padding: 2rem;
+    border-radius: var(--br-semi);
+    gap: 1rem;
+}
+
 .table {
     text-align: left;
     min-width: 50rem;
@@ -19,4 +27,14 @@
 .table th, .table td {
     padding: 0.5rem;
     border: 1px solid hsl(var(--clr-light-gray))
+}
+
+.room {
+    
+}
+
+.logoutBtn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
 }

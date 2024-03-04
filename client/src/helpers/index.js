@@ -1,0 +1,1 @@
+export { spinalCase } from "./spinalCase.js";

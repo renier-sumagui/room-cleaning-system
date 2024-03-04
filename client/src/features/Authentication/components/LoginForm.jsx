@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUserContext } from "contexts/UserContext.jsx";
 import styles from "./LoginForm.module.css";
 import InputError from "components/Error/InputError.jsx";
@@ -43,19 +43,28 @@ export default function LoginForm() {
     async function handleSubmit(event) {
         event.preventDefault();
         if (!checkInput(employeeId, setEmployeeIdErr) && !checkInput(password, setPasswordErr)) {
-            // Checks if credentials matched an employee and has no error
             setLoading(true);
             let result = await submitLoginForm({ employee_id: employeeId, password: password });
             setLoading(false);
 
             if (result.success) { 
-                result.user.is_admin ? navigate("/admin") : navigate("/employee");
+                result.user.is_admin ? navigate("/admin") : navigate("/employee/home");
+                localStorage.setItem("user", JSON.stringify(result.user));
                 setUser(result.user);
             } else {
                 setInvalidCredentials(true);
             }
         }
     }
+
+    useEffect(() => {
+        let user = JSON.parse(localStorage.getItem("user"));
+        if (user !== null) {
+            setUser(user);
+        } else {
+            console.log("USER IS NOT SET")
+        }
+    }, [])
 
     return (
         <>
